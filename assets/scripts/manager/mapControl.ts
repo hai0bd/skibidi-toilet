@@ -23,19 +23,19 @@ export class MapControl extends Component {
     }
 
     init() {
-        const rand = math.randomRange(1, 5);
+        const rand = math.randomRange(1, 3);
         for (let i = 0; i < rand; i++) {
             this.spawnShjt();
         }
         this.speed += 10;
 
-        this.schedule(this.init, 5);
+        this.schedule(this.init, 2);
     }
 
     spawnShjt() {
         const shjt = instantiate(this.shjtPrefab);
         const randomX = math.randomRange(-300, 300);
-        const randomY = math.randomRange(235, 550);
+        const randomY = math.randomRange(235, 600);
         shjt.setPosition(new Vec3(randomX, randomY, 0));
         shjt.getComponent(Shjt).speed = this.speed;
         this.node.addChild(shjt);
