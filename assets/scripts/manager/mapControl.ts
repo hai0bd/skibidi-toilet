@@ -18,6 +18,9 @@ export class MapControl extends Component {
     @property(CCFloat)
     speed: number = 100;
 
+    @property(CCFloat)
+    durationTime: number = 2;
+
     start() {
         this.init()
     }
@@ -29,15 +32,16 @@ export class MapControl extends Component {
         }
         this.speed += 10;
 
-        this.schedule(this.init, 2);
+        this.schedule(this.init, this.durationTime -= 0.01);
     }
 
     spawnShjt() {
+        const speed = this.speed;
         const shjt = instantiate(this.shjtPrefab);
         const randomX = math.randomRange(-300, 300);
         const randomY = math.randomRange(235, 600);
         shjt.setPosition(new Vec3(randomX, randomY, 0));
-        shjt.getComponent(Shjt).speed = this.speed;
+        shjt.getComponent(Shjt).speed = speed;
         this.node.addChild(shjt);
     }
 

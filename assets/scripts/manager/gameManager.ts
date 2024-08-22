@@ -1,10 +1,16 @@
-import { _decorator, Component, Node, UITransform } from 'cc';
+import { _decorator, Component, instantiate, Node, Prefab, UITransform } from 'cc';
+import { MapControl } from './mapControl';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
 export class GameManager extends Component {
     @property(UITransform)
     gameTf: UITransform | null = null;
+
+    @property(Prefab)
+    mapPrefab: Prefab | null = null;
+
+    map: MapControl = null;
 
     private static _instance: GameManager;
     public static get instance(): GameManager {
@@ -23,7 +29,15 @@ export class GameManager extends Component {
 
     }
 
+    startGame() {
+        if (this.map) this.map.node.destroy();
+        const map = instantiate(this.mapPrefab);
+        this.node.addChild(map);
+        this.map = map.getComponent(MapControl);
+    }
+
     loseGame(score: number) {
+        this.map.enabled = false;
         data.score += score;
     }
 }

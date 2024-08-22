@@ -2,7 +2,6 @@ import { _decorator, BoxCollider2D, CCFloat, Collider2D, Component, Contact2DTyp
 import { ColliderTag } from './enum';
 import { MapControl } from './manager/mapControl';
 import { GameManager } from './manager/gameManager';
-import { instance, JoystickDataType, SpeedType } from '../cocos-creator-joystick-0.2.0/assets/scripts/Joystick';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -15,11 +14,6 @@ export class Player extends Component {
 
     @property(CCFloat)
     speed: number = 1;
-
-    control = {
-        keyLeft: false,
-        keyRight: false
-    };
 
     wallPos: Vec2 = new Vec2();
     lastTouch: Vec2 = new Vec2();
